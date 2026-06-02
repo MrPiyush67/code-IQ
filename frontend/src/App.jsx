@@ -12,6 +12,14 @@ import {
   UserButton,
 } from '@clerk/react';
 
+/**
+ * Root application component that displays a welcome header and conditional authentication controls.
+ *
+ * Renders a heading "welcome to the app". When the user is signed out, shows SignIn and SignUp buttons;
+ * when signed in, shows the User menu button and SignOut button.
+ *
+ * @returns {JSX.Element} The app's top-level JSX containing the header and Clerk-based sign-in/sign-out UI.
+ */
 function App() {
   const [count, setCount] = useState(0);
 
