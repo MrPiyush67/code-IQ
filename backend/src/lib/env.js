@@ -5,7 +5,7 @@ dotenv.config({ quiet: true });
 export const ENV = {
   PORT: process.env.PORT,
   DB_URI: process.env.DB_URI,
-  NODE_ENV: process.env.NODE_ENV,
+  APP_ENV: process.env.APP_ENV,
   CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:5173',
   INGEST_EVENT_KEY: process.env.INGEST_EVENT_KEY,
   INGEST_SIGNING_KEY: process.env.INGEST_SIGNING_KEY,
