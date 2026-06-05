@@ -10,6 +10,7 @@ import { functions, inngest } from './lib/inngest.js';
 import { fileURLToPath } from 'url';
 import { protectRoute } from './middlewares/protectRoute.js';
 import chatRoutes from './routes/chatRoutes.js'
+import sessionRoutes from './routes/sessionRoutes.js'
 
 const app = express();
 
@@ -21,7 +22,8 @@ app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware()) // this will add auth field to req: req.auth()
 
 app.use('/api/inngest', serve({ client: inngest, functions }));
-app.use('api/chat', chatRoutes);
+app.use('api/chat', protectRoute, chatRoutes);
+app.use('api/sessions',protectRoute, sessionRoutes);
 
 app.get('/health', (req, res) => {
   return res.status(200).json({ message: 'api is up and running' });
