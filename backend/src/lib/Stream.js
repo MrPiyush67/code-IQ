@@ -1,4 +1,5 @@
 import { StreamChat } from 'stream-chat';
+import { StreamClient } from '@stream-io/node-sdk';
 import { ENV } from './env.js';
 
 const apiKey = ENV.STREAM_API_KEY;
@@ -9,22 +10,21 @@ if (!apiKey || !apiSecret) {
 }
 
 export const chatClient = StreamChat.getInstance(apiKey, apiSecret);
+export const streamClient = new StreamClient(apiKey, apiSecret);
 
-export const upserStreamUser = async(userData) => {
-    try {
-        await chatClient.upsertUser(userData)
-        console.log("stream user upserted successfully:",userData)
-    } catch (error) {
-        console.error("error upserting stream user:",error)
-        
-    }
-}
-export const deleteStreamUser = async(userId) => {
-    try {
-        await chatClient.deleteUser(userId)
-        console.log("stream user  deleted successfully:",userId)
-    } catch (error) {
-        console.error("error deleting the stream user:",error)
-        
-    }
-}
+export const upserStreamUser = async (userData) => {
+  try {
+    await chatClient.upsertUser(userData);
+    console.log('stream user upserted successfully:', userData);
+  } catch (error) {
+    console.error('error upserting stream user:', error);
+  }
+};
+export const deleteStreamUser = async (userId) => {
+  try {
+    await chatClient.deleteUser(userId);
+    console.log('stream user  deleted successfully:', userId);
+  } catch (error) {
+    console.error('error deleting the stream user:', error);
+  }
+};
