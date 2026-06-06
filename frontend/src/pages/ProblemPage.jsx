@@ -114,7 +114,7 @@ function ProblemPage() {
       <Navbar />
 
       <div className="flex-1">
-        <Group direction="horizontal">
+        <Group orientation="horizontal">
           {/* left panel- problem desc */}
           <Panel defaultSize={40} minSize={30}>
             <ProblemDescription
@@ -129,7 +129,7 @@ function ProblemPage() {
 
           {/* right panel- code editor & output */}
           <Panel defaultSize={60} minSize={30}>
-            <Group direction="vertical">
+            <Group orientation="vertical">
               {/* Top panel - Code editor */}
               <Panel defaultSize={70} minSize={30}>
                 <CodeEditorPanel
