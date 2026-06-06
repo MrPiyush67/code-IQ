@@ -42,7 +42,7 @@ async function createSession(req, res) {
 
     res.status(201).json({ session });
   } catch (error) {
-    console.error('error in createSession controller', error.message);
+    console.error('error in createSession controller', error);
     res.status(500).json({ message: 'internal server error' });
   }
 }
@@ -63,7 +63,7 @@ async function getMyRecentSessions(req, res) {
   try {
     const userId = req.user._id;
     //get sessions where user is either host or participant
-    await Session.find({
+    const sessions = await Session.find({
       status: 'completed',
       $or: [{ host: userId }, { participant: userId }],
     })
