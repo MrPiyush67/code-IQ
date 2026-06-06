@@ -129,16 +129,18 @@ async function endSession(req, res) {
   try {
     const id = req.params.id;
     const userId = req.user._id;
-    const session = Session.findById(id);
+    const session = await Session.findById(id);
 
-    id(!session);
-    return res.status(404).json({ message: 'session not found' });
+    if (!session) {
+      return res.status(404).json({ message: 'session not found' });
+    }
+    // console.log(session);
 
     //check if user is the host
     if (session.host.toString() !== userId.toString())
       return res
         .status(403)
-        .json({ message: 'onlyl the host can end the session' });
+        .json({ message: 'only the host can end the session' });
 
     if (session.status == 'completed')
       return res.status(400).json({ message: 'session is already completed' });
@@ -155,7 +157,7 @@ async function endSession(req, res) {
 
     res.status(200).json({ session, message: 'session ended successfully' });
   } catch (error) {
-    console.error('error in endSession controller', error.message);
+    console.error('error in endSession controller:', error.message);
     res.status(500).json({ message: 'internal server error' });
   }
 }
