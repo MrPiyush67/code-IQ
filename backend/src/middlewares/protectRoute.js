@@ -3,7 +3,7 @@ import User from '../models/User.js';
 
 export const protectRoute = [
   requireAuth(),
-  (req, res, next) => {
+  async (req, res, next) => {
     try {
       const clerkId = req.auth().userId;
       if (!clerkId) {
@@ -11,7 +11,7 @@ export const protectRoute = [
           .status(401)
           .json({ message: 'unauthorised - invalid token' });
       }
-      const user = User.findOne({ clerkId });
+      const user = await User.findOne({ clerkId });
 
       if (!user) {
         return res.start(404).json({ message: 'user not found' });
