@@ -13,6 +13,7 @@
     "@clerk/clerk-react": "^5.61.8",
     "@clerk/react": "^6.7.2",
     "@monaco-editor/react": "^4.7.0",
+    "@stream-io/video-react-sdk": "^1.37.4",
     "@tailwindcss/vite": "^4.3.0",
     "@tanstack/react-query": "^5.101.0",
     "axios": "^1.17.0",
