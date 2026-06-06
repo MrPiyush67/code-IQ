@@ -4,7 +4,12 @@ import toast from 'react-hot-toast';
 import { initializeStreamClient, disconnectStreamClient } from '../lib/stream';
 import { sessionApi } from '../api/sessions';
 
-function useStreamClient(session, loadingSession, isHost, isParticipant) {
+export default function useStreamClient(
+  session,
+  loadingSession,
+  isHost,
+  isParticipant,
+) {
   const [streamClient, setStreamClient] = useState(null);
   const [call, setCall] = useState(null);
   const [chatClient, setChatClient] = useState(null);
@@ -91,5 +96,3 @@ function useStreamClient(session, loadingSession, isHost, isParticipant) {
     isInitializingCall,
   };
 }
-
-export default useStreamClient;

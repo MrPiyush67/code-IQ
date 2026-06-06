@@ -61,7 +61,6 @@ function SessionPage() {
     hasAttemptedJoin.current = true;
 
     joinSessionMutation.mutate(id, { onSuccess: refetch });
-
   }, [session, user, loadingSession, isHost, isParticipant, id]);
 
   // redirect the "participant" when session ends
