@@ -20,7 +20,6 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(clerkMiddleware()); // this will add auth field to req: req.auth()
-console.log(ENV.CLIENT_URL);
 
 app.use('/api/inngest', serve({ client: inngest, functions }));
 app.use('/api/chat', protectRoute, chatRoutes);
