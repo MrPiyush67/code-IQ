@@ -1,5 +1,5 @@
 import { useUser } from '@clerk/clerk-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import {
   useEndSession,
@@ -9,7 +9,7 @@ import {
 import { PROBLEMS } from '../data/problems';
 import { executeCode } from '../lib/piston';
 import Navbar from '../components/Navbar';
-import { Panel, Group, separator } from 'react-resizable-panels';
+import { Panel, Group, Separator } from 'react-resizable-panels';
 import { getDifficultyBadgeClass } from '../lib/utils';
 import { Loader2Icon, LogOutIcon, PhoneOffIcon } from 'lucide-react';
 import CodeEditorPanel from '../components/CodeEditorPanel';
@@ -25,7 +25,7 @@ function SessionPage() {
   const { user } = useUser();
   const [output, setOutput] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
-
+  const hasAttemptedJoin = useRef(false);
   const {
     data: sessionData,
     isLoading: loadingSession,
@@ -56,10 +56,12 @@ function SessionPage() {
   useEffect(() => {
     if (!session || !user || loadingSession) return;
     if (isHost || isParticipant) return;
+    if (hasAttemptedJoin.current) return;
+
+    hasAttemptedJoin.current = true;
 
     joinSessionMutation.mutate(id, { onSuccess: refetch });
 
-    // remove the joinSessionMutation, refetch from dependencies to avoid infinite loop
   }, [session, user, loadingSession, isHost, isParticipant, id]);
 
   // redirect the "participant" when session ends
@@ -259,7 +261,7 @@ function SessionPage() {
                 </div>
               </Panel>
 
-              <separator className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+              <Separator className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
               <Panel defaultSize={50} minSize={20}>
                 <Group orientation="vertical">
@@ -274,7 +276,7 @@ function SessionPage() {
                     />
                   </Panel>
 
-                  <separator className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+                  <Separator className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
 
                   <Panel defaultSize={30} minSize={15}>
                     <OutputPanel output={output} />
@@ -284,7 +286,7 @@ function SessionPage() {
             </Group>
           </Panel>
 
-          <separator className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
+          <Separator className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
 
           {/* RIGHT PANEL - VIDEO CALLS & CHAT */}
           <Panel defaultSize={50} minSize={30}>

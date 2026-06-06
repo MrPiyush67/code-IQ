@@ -23,7 +23,7 @@ const syncUser = inngest.createFunction(
     await upserStreamUser({
         id:newUser.clerkId.toString(),
         name: newUser.name,
-        image: newUser.profleImage,
+        image: newUser.profileImage,
     })
     //todo: do something else here
   },
