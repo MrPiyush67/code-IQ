@@ -12,13 +12,13 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
     profileImage: {
-        type: String,
-        default: '',
+      type: String,
+      default: '',
     },
     clerkId: {
-        type: String,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
+      unique: true,
     },
   },
   { timestamps: true },
@@ -26,6 +26,4 @@ const userSchema = new mongoose.Schema(
 
 const User = mongoose.model('User', userSchema);
 
-export default User
-
-
+export default User;
